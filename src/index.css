@@ -10,31 +10,72 @@ body {
 }
 
 @layer utilities {
+  /* existing animations */
   @keyframes blink {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 
   .animate-blink {
     animation: blink 0.8s step-end infinite;
   }
 
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  .animate-fade-out {
+    animation: fade-out 0.8s ease forwards;
+  }
+
   @keyframes loading {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(250%);
-    }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(250%); }
   }
 
   .animate-loading-bar {
     animation: loading 0.8s ease infinite;
+  }
+
+  /* =============================== */
+  /* 🔍 SCANNING TEXT EFFECT ADDED ↓ */
+  /* =============================== */
+  .scan-container {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    --scan-color: rgba(34, 211, 238, 0.2); /* cyan-like scan color */
+  }
+
+  .scan-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .scan-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.08) 30%,
+      var(--scan-color) 50%,
+      rgba(255,255,255,0.08) 70%,
+      rgba(255,255,255,0) 100%
+    );
+    mix-blend-mode: screen;
+    transform: translateX(-120%);
+    animation: scan 2.4s linear infinite;
+    filter: blur(0.3px);
+  }
+
+  @keyframes scan {
+    0% { transform: translateX(-120%); }
+    50% { transform: translateX(120%); }
+    100% { transform: translateX(-120%); }
   }
 }
 
@@ -48,3 +89,47 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.35s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeUp {
+  animation: fadeUp 0.6s ease-out forwards;
+}
+

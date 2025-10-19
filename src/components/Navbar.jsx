@@ -1,53 +1,73 @@
 import { useEffect } from "react";
+import {
+  AiFillHome,
+  AiOutlineFundProjectionScreen,
+  AiOutlineMail,
+} from "react-icons/ai";
+import { FaUserAlt, FaCertificate } from "react-icons/fa";
 
 export const Navbar = ({ menuOpen, setMenuOpen }) => {
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
   }, [menuOpen]);
+
   return (
-    <nav className="fixed top-0 w-full z-40 bg-[rgba(10, 10, 10, 0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">
+    <nav className="fixed top-0 w-full z-40 bg-[rgba(10,10,10,0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <a href="#home" className="font-mono text-xl font-bold text-white">
-            {" "}
-            pedro<span className="text-blue-500">.tech</span>{" "}
+          {/* Logo */}
+          <a href="#home" className="text-2xl font-bold text-white">
+            Rajesh Sharma | Portfolio
           </a>
 
+          {/* Hamburger menu (for mobile) */}
           <div
-            className="w-7 h-5 relative cursor-pointer z-40 md:hidden"
+            className="w-7 h-5 relative cursor-pointer z-40 md:hidden text-white text-2xl"
             onClick={() => setMenuOpen((prev) => !prev)}
           >
             &#9776;
           </div>
 
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop menu */}
+          <div className="hidden md:flex items-center space-x-8 text-gray-300 font-medium">
             <a
               href="#home"
-              className="text-gray-300 hove:text-white transition-colors"
+              className="flex items-center gap-2 relative hover:text-blue-400 transition-colors after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 hover:after:w-full after:transition-all after:duration-300"
+
             >
-              {" "}
-              Home
+              <AiFillHome className="text-lg" /> Home
             </a>
+
             <a
               href="#about"
-              className="text-gray-300 hove:text-white transition-colors"
+              className="flex items-center gap-2 relative hover:text-blue-400 transition-colors after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 hover:after:w-full after:transition-all after:duration-300"
+
             >
-              {" "}
-              About{" "}
+              <FaUserAlt className="text-lg" /> About
             </a>
+
             <a
               href="#projects"
-              className="text-gray-300 hove:text-white transition-colors"
+              className="flex items-center gap-2 relative hover:text-blue-400 transition-colors after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 hover:after:w-full after:transition-all after:duration-300"
+
             >
-              {" "}
-              Projects{" "}
+              <AiOutlineFundProjectionScreen className="text-lg" /> Projects
             </a>
+
+            <a
+              href="#certifications"
+              className="flex items-center gap-2 relative hover:text-blue-400 transition-colors after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 hover:after:w-full after:transition-all after:duration-300"
+
+            >
+              <FaCertificate className="text-lg" /> Certifications
+            </a>
+
             <a
               href="#contact"
-              className="text-gray-300 hove:text-white transition-colors"
+              className="flex items-center gap-2 relative hover:text-blue-400 transition-colors after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 hover:after:w-full after:transition-all after:duration-300"
+
             >
-              {" "}
-              Contact{" "}
+              <AiOutlineMail className="text-lg" /> Contact
             </a>
           </div>
         </div>
