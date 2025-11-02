@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* ======== Global Styles ======== */
 html,
 body {
   margin: 0;
@@ -7,45 +8,28 @@ body {
   font-family: "Space Grotesk", sans-serif;
   background: #0a0a0a;
   color: #f3f4f6;
+  scroll-behavior: smooth; /* ✅ smooth scrolling for navbar */
 }
 
+/* ======== Reveal Animation ======== */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ======== SCANNING TEXT EFFECT ======== */
 @layer utilities {
-  /* existing animations */
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
-  .animate-blink {
-    animation: blink 0.8s step-end infinite;
-  }
-
-  @keyframes fade-out {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
-
-  .animate-fade-out {
-    animation: fade-out 0.8s ease forwards;
-  }
-
-  @keyframes loading {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(250%); }
-  }
-
-  .animate-loading-bar {
-    animation: loading 0.8s ease infinite;
-  }
-
-  /* =============================== */
-  /* 🔍 SCANNING TEXT EFFECT ADDED ↓ */
-  /* =============================== */
   .scan-container {
     position: relative;
     display: inline-block;
     overflow: hidden;
-    --scan-color: rgba(34, 211, 238, 0.2); /* cyan-like scan color */
+    --scan-color: rgba(34, 211, 238, 0.2);
   }
 
   .scan-text {
@@ -57,7 +41,7 @@ body {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    z-index: 2;
+    z-index: 0; /* ✅ was 2 — moved behind text for clarity */
     background: linear-gradient(
       90deg,
       rgba(255,255,255,0) 0%,
@@ -79,57 +63,64 @@ body {
   }
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+/* ======== TEXT ANIMATIONS ======== */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-blink {
+  animation: blink 0.8s step-end infinite;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.35s ease-out forwards;
+.animate-fade-out {
+  animation: fade-out 0.8s ease forwards;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .animate-fadeIn {
   animation: fadeIn 0.4s ease-out forwards;
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ======== FLOAT (Profile Photo) ======== */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
 }
-.animate-fadeUp {
-  animation: fadeUp 0.6s ease-out forwards;
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }
 
+/* ======== SLIDE + LINK ANIMATIONS ======== */
+@keyframes slideDown {
+  0% { transform: translateY(-15%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-10%); opacity: 0; }
+}
+@keyframes linkIn {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slideDown { animation: slideDown 0.6s ease forwards; }
+.animate-fadeUp { animation: fadeUp 0.5s ease forwards; }
+.animate-linkIn { animation: linkIn 0.6s ease forwards; }
+
+/* ======== Minor Animation Tweaks ======== */
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
+}
+.animate-loading-bar {
+  animation: loading 0.8s ease infinite;
+}
